@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Grid Stability Prediction</title>
+</head>
+<body>
+  <div>
+    <h1>Inputs</h1>
+    <form action="/predict" method="post">
+      <div>
+        <label for="reactionTimeProducer">Reaction Time - Energy Producer:</label>
+        <input type="number" id="reactionTimeProducer" name="reactionTimeProducer" step="0.01" required>
+      </div>
+      <div>
+        <label for="reactionTimeConsumer1">Reaction Time - Consumer 1:</label>
+        <input type="number" id="reactionTimeConsumer1" name="reactionTimeConsumer1" step="0.01" required>
+      </div>
+      <div>
+        <label for="reactionTimeConsumer2">Reaction Time - Consumer 2:</label>
+        <input type="number" id="reactionTimeConsumer2" name="reactionTimeConsumer2" step="0.01" required>
+      </div>
+      <div>
+        <label for="reactionTimeConsumer3">Reaction Time - Consumer 3:</label>
+        <input type="number" id="reactionTimeConsumer3" name="reactionTimeConsumer3" step="0.01" required>
+      </div>
+      <div>
+        <label for="elasticityProducer">Price Elasticity Coefficient (gamma) - Energy Producer:</label>
+        <input type="number" id="elasticityProducer" name="elasticityProducer" step="0.01" required>
+      </div>
+      <div>
+        <label for="elasticityConsumer1">Price Elasticity Coefficient (gamma) - Consumer 1:</label>
+        <input type="number" id="elasticityConsumer1" name="elasticityConsumer1" step="0.01" required>
+      </div>
+      <div>
+        <label for="elasticityConsumer2">Price Elasticity Coefficient (gamma) - Consumer 2:</label>
+        <input type="number" id="elasticityConsumer2" name="elasticityConsumer2" step="0.01" required>
+      </div>
+      <div>
+        <label for="elasticityConsumer3">Price Elasticity Coefficient (gamma) - Consumer 3:</label>
+        <input type="number" id="elasticityConsumer3" name="elasticityConsumer3" step="0.01" required>
+      </div>
+      <div>
+        <label for="stab">Stability - Maximal Real Part of Characteristic Differential Equation Root:</label>
+        <input type="number" id="stab" name="stab" step="0.01" required>
+      </div>
+      <div>
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
