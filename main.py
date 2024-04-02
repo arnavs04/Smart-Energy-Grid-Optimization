@@ -74,8 +74,9 @@ def model2():
 
     
         prediction = pickled_model2.predict([[wind_speed, wind_direction, power_curve]])
+        prediction_with_units = f"{prediction} kW"
 
-        return redirect(url_for('results', prediction=prediction))
+        return redirect(url_for('results', prediction=prediction_with_units))
     
     return render_template("model2.html")
 
