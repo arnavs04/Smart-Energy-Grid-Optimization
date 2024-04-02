@@ -1,6 +1,6 @@
 Flask
 pickle
-sklearn==1.4.0
+sklearn==1.4.1
 pandas
 numpy
 matplotlib
