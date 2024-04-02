@@ -1,6 +1,22 @@
-from flask import Flask, render_template, request
+# Imports
+
+from flask import Flask, render_template, request, redirect, url_for
+import pickle
+import sklearn
+
+#############################################################
+
+with open('models/model1.pkl', 'rb') as file:
+    pickled_model1 = pickle.load(file)
+
+with open('models/model2.pkl', 'rb') as file:
+    pickled_model2 = pickle.load(file)
+
+#############################################################
 
 app = Flask(__name__)
+
+#############################################################
 
 @app.route('/')
 def index():
@@ -20,10 +36,17 @@ def about():
 
 #############################################################
 
+@app.route('/results.html')
+def results():
+    prediction = request.args.get('prediction')
+    return render_template('results.html', prediction=prediction)
+
+#############################################################
+
 @app.route('/model1.html', methods=['POST', 'GET'])
 def model1():
     if request.method == 'POST':
-        # Get the form data
+        
         reaction_time_producer = float(request.form['reactionTimeProducer'])
         reaction_time_consumer1 = float(request.form['reactionTimeConsumer1'])
         reaction_time_consumer2 = float(request.form['reactionTimeConsumer2'])
@@ -34,27 +57,25 @@ def model1():
         elasticity_consumer3 = float(request.form['elasticityConsumer3'])
         stab = float(request.form['stab'])
 
-        # Here you can perform your prediction or any other processing with the input data
-        # For now, let's just return a basic response
-        prediction_result = f"Reaction Time (Energy Producer): {reaction_time_producer}, Reaction Time (Consumer 1): {reaction_time_consumer1}, Reaction Time (Consumer 2): {reaction_time_consumer2}, Reaction Time (Consumer 3): {reaction_time_consumer3}, Elasticity (Energy Producer): {elasticity_producer}, Elasticity (Consumer 1): {elasticity_consumer1}, Elasticity (Consumer 2): {elasticity_consumer2}, Elasticity (Consumer 3): {elasticity_consumer3}, Stability: {stab}"
+        prediction_num = pickled_model1.predict([[reaction_time_producer, reaction_time_consumer1, reaction_time_consumer2, reaction_time_consumer3, elasticity_producer, elasticity_consumer1, elasticity_consumer2, elasticity_consumer3, stab]])
+        prediction = "Stable" if prediction_num == 1 else "Unstable"
 
-        return prediction_result
+        return redirect(url_for('results', prediction=prediction))
     
     return render_template("model1.html")
 
 @app.route('/model2.html', methods=['POST', 'GET'])
 def model2():
-    # Get the form data
+    
     if request.method == 'POST':
         wind_speed = float(request.form['windSpeed'])
         wind_direction = float(request.form['windDirection'])
         power_curve = float(request.form['powerCurve'])
 
-        # Here you can perform your prediction or any other processing with the input data
-        # For now, let's just return a basic response
-        prediction_result = f"Wind Speed: {wind_speed}, Wind Direction: {wind_direction}, Power Curve: {power_curve}"
+    
+        prediction = pickled_model2.predict([[wind_speed, wind_direction, power_curve]])
 
-        return prediction_result
+        return redirect(url_for('results', prediction=prediction))
     
     return render_template("model2.html")
 
