@@ -1,5 +1,5 @@
-Flask
-python==3.9
+Flask==2.0.2
+python==3.8
 sklearn==1.4.1
 pandas
 numpy
