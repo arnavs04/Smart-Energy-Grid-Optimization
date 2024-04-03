@@ -1,5 +1,5 @@
-Flask==2.0.2
-sklearn==1.4.1
+Flask
+sklearn
 pandas
 numpy
 matplotlib
